@@ -165,3 +165,106 @@ exports.getTripTransport = asyncHandler(async (req, res) => {
     data: transportRecommendations
   });
 });
+
+// @desc    获取行程住宿推荐
+// @route   GET /api/trips/:id/accommodation
+// @access  Private
+exports.getTripAccommodation = asyncHandler(async (req, res) => {
+  const trip = await Trip.findById(req.params.id);
+  
+  if (!trip) {
+    throw new AppError('未找到行程', 404);
+  }
+  
+  // 检查行程所有权
+  if (trip.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    throw new AppError('无权访问此行程', 403);
+  }
+  
+  const accommodationData = {
+    destination: trip.destination,
+    checkIn: trip.startDate,
+    checkOut: trip.endDate,
+    budget: trip.budget,
+    accommodationType: req.query.accommodationType || '所有',
+    travelPurpose: trip.travelStyle,
+    guests: req.query.guests || 1,
+    specialRequirements: trip.specialRequirements
+  };
+  
+  const accommodationRecommendations = await accommodationAgent.getAccommodationRecommendations(accommodationData);
+  
+  res.status(200).json({
+    success: true,
+    data: accommodationRecommendations
+  });
+});
+
+// @desc    获取行程活动推荐
+// @route   GET /api/trips/:id/activities
+// @access  Private
+exports.getTripActivities = asyncHandler(async (req, res) => {
+  const foodActivityAgent = require('../services/agents/foodActivityAgent');
+  const trip = await Trip.findById(req.params.id);
+  
+  if (!trip) {
+    throw new AppError('未找到行程', 404);
+  }
+  
+  // 检查行程所有权
+  if (trip.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    throw new AppError('无权访问此行程', 403);
+  }
+  
+  const activityData = {
+    destination: trip.destination,
+    date: req.query.date || trip.startDate,
+    time: req.query.time || '上午',
+    budget: trip.budget,
+    interests: trip.interests,
+    activityType: req.query.activityType || '所有',
+    people: req.query.people || 1
+  };
+  
+  const activityRecommendations = await foodActivityAgent.getActivityRecommendations(activityData);
+  
+  res.status(200).json({
+    success: true,
+    data: activityRecommendations
+  });
+});
+
+// @desc    获取行程美食推荐
+// @route   GET /api/trips/:id/food
+// @access  Private
+exports.getTripFood = asyncHandler(async (req, res) => {
+  const foodActivityAgent = require('../services/agents/foodActivityAgent');
+  const trip = await Trip.findById(req.params.id);
+  
+  if (!trip) {
+    throw new AppError('未找到行程', 404);
+  }
+  
+  // 检查行程所有权
+  if (trip.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    throw new AppError('无权访问此行程', 403);
+  }
+  
+  const foodData = {
+    destination: trip.destination,
+    date: req.query.date || trip.startDate,
+    time: req.query.time || '晚上',
+    budget: trip.budget,
+    cuisinePreferences: req.query.cuisinePreferences || trip.interests.filter(i => i === '美食').length > 0 ? '当地特色' : '多样化',
+    dietaryRestrictions: req.query.dietaryRestrictions || '无',
+    people: req.query.people || 1,
+    occasion: req.query.occasion || '休闲'
+  };
+  
+  const foodRecommendations = await foodActivityAgent.getRestaurantRecommendations(foodData);
+  
+  res.status(200).json({
+    success: true,
+    data: foodRecommendations
+  });
+});
