@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 // 路由导入 import routes
 const authRoutes = require('./routes/authRoutes');
 const tripRoutes = require('./routes/tripRoutes');
+const agentRoutes = require('./routes/agentRoutes');
 const userRoutes = require('./routes/userRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 
@@ -30,6 +31,7 @@ app.use(loggerMiddleware);
 // API路由 API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/trips', tripRoutes);
+app.use('/api/agent', agentRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api', apiRoutes);
 
