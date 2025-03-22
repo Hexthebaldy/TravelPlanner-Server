@@ -8,12 +8,12 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const tripRoutes = require('./routes/tripRoutes');
 const agentRoutes = require('./routes/agentRoutes');
-const userRoutes = require('./routes/userRoutes');
-const apiRoutes = require('./routes/apiRoutes');
+// const userRoutes = require('./routes/userRoutes');
+// const apiRoutes = require('./routes/apiRoutes');
 
 // 中间件导入 import middleware
 const errorMiddleware = require('./middleware/errorMiddleware');
-const { loggerMiddleware } = require('./middleware/loggingMiddleware');
+// const { loggerMiddleware } = require('./middleware/loggingMiddleware');
 
 // 加载环境变量 load environment variables
 dotenv.config();
@@ -26,14 +26,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(loggerMiddleware);
+// app.use(loggerMiddleware);
 
 // API路由 API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/trips', tripRoutes);
 app.use('/api/agent', agentRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api', apiRoutes);
+// app.use('/api/users', userRoutes);
+// app.use('/api', apiRoutes);
 
 // 健康检查 test api
 app.get('/health', (req, res) => {

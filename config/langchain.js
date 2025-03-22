@@ -1,14 +1,23 @@
 const { OpenAI } = require('langchain/llms/openai');
 const { ConversationChain } = require('langchain/chains');
 const { BufferMemory } = require('langchain/memory');
+require('dotenv').config();
 
-// 创建OpenAI模型实例,temperature越大,生成的文本越随机
-// Create an instance of the OpenAI model with a temperature of 0.7
+// 创建DeepSeek模型实例（使用OpenAI兼容接口）
 const createOpenAIModel = (temperature = 0.7) => {
+  // 检查API密钥是否存在
+  if (!process.env.OPENAI_API_KEY) {
+    throw new Error('DeepSeek API密钥未在环境变量中设置');
+  }
+
   return new OpenAI({
     openAIApiKey: process.env.OPENAI_API_KEY,
-    temperature,
-    modelName: 'gpt-4', // 或其他适合的模型 or other suitable model
+    modelName: 'deepseek-chat', // DeepSeek模型名称
+    temperature: temperature,
+    maxTokens: 1000,
+    configuration: {
+      baseURL: 'https://api.deepseek.com/v1', // DeepSeek API基础URL
+    }
   });
 };
 

@@ -1,0 +1,2 @@
+{"level":"info","message":"server is running at port: 3000","service":"travel-planner-api","timestamp":"2025-03-21 12:05:50"}
+{"level":"error","message":"Connection Failed: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","service":"travel-planner-api","timestamp":"2025-03-21 12:06:20"}
