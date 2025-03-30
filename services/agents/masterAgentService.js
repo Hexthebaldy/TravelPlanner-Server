@@ -46,8 +46,15 @@ class MasterAgentService {
         
         用户问题: ${query}
         
-        请提供有帮助、友好且信息丰富的回答。如果你不确定，请诚实地说明并提供一般性建议。
-        回复尽量简短，单次回复不要超过200字
+        从用户的问题中提炼出目的地，旅行天数，预算，如果有特殊需求请带上特殊需求。以JSON格式的纯文本返回响应。
+
+        示例响应:
+      {
+        "destination": "paris",
+        "duration": 7,
+        "budget": "20k rmb",
+        "specialRequirements": "visit the Eiffel Tower"
+      }
       `;
       
       // 直接调用模型
@@ -55,8 +62,21 @@ class MasterAgentService {
       console.log('response: ',response);
       // 保存对话历史
       this.saveConversation('0001', '0001', query, response.content);
+
+      // 解析响应 - 修复JSON解析问题
+      let jsonContent = response.content;
+      // 移除可能存在的Markdown代码块标记
+      jsonContent = jsonContent.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+      const requirements = JSON.parse(jsonContent);
+      console.log('#requirements: ',requirements);
+
+      //创建tripPlannerAgent
+      const tripPlanner = new this.agentMap[1](requirements.destination, requirements.duration, requirements.budget, requirements.specialRequirements);
+
+      // 生成行程计划
+      const tripPlan = await tripPlanner.generateTripPlan();
       
-      return response.content || '抱歉，我无法处理您的请求。';
+      return tripPlan || '抱歉，我无法处理您的请求。';
     } catch (error) {
       logger.error(`生成通用回复失败: ${error.message}`);
       return '抱歉，我暂时无法回答您的问题。请稍后再试或提供更多信息。';

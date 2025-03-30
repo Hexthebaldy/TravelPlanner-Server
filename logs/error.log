@@ -25,3 +25,5 @@
 {"level":"error","message":"保存对话历史失败: Conversation validation failed: response: 响应内容不能为空","service":"travel-planner-api","timestamp":"2025-03-30 22:10:07"}
 {"level":"error","message":"保存对话历史失败: Conversation validation failed: response: 响应内容不能为空","service":"travel-planner-api","timestamp":"2025-03-30 23:10:19"}
 {"level":"error","message":"保存对话历史失败: Conversation validation failed: response: 响应内容不能为空","service":"travel-planner-api","timestamp":"2025-03-30 23:11:43"}
+{"level":"error","message":"生成通用回复失败: Unexpected token '`', \"```json\n{\n\"... is not valid JSON","service":"travel-planner-api","timestamp":"2025-03-30 23:54:36"}
+{"level":"error","message":"planning trip failed: promptText is not defined","service":"travel-planner-api","timestamp":"2025-03-30 23:58:36"}

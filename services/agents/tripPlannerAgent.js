@@ -24,8 +24,9 @@ class TripPlannerAgent {
   //优化空间：参数校验
   async generateTripPlan() {
     try {
-      const response = await this.llm.invoke(promptText);
-      
+      console.log('#promptText: ',this.promptText);
+      const response = await this.llm.invoke(this.promptText);
+      console.log('response context: ',response.content);
       return response.content || 'handle error'
     } catch (error) {
       logger.error(`planning trip failed: ${error.message}`);
@@ -37,4 +38,4 @@ class TripPlannerAgent {
   }
 }
 
-module.exports = TripPlannerAgent();
+module.exports = TripPlannerAgent;
