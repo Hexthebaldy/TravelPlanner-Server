@@ -2,13 +2,11 @@ const mongoose = require('mongoose');
 
 const ConversationSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
     required: true
   },
   trip: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Trip'
+    type: String
   },
   query: {
     type: String,

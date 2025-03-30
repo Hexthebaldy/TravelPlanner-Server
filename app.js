@@ -21,11 +21,13 @@ dotenv.config();
 const app = express();
 
 // 基础中间件 base middleware
-app.use(helmet());
-app.use(cors());
+// app.use(helmet());
+app.use(cors({
+  origin: 'http://localhost:3001'
+}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+// app.use(express.urlencoded({ extended: true }));
+// app.use(morgan('dev'));
 // app.use(loggerMiddleware);
 
 // API路由 API routes

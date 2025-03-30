@@ -3,21 +3,24 @@ const { ConversationChain } = require('langchain/chains');
 const { BufferMemory } = require('langchain/memory');
 require('dotenv').config();
 
-// 创建DeepSeek模型实例（使用OpenAI兼容接口）
+// 创建OpenAI模型实例
 const createOpenAIModel = (temperature = 0.7) => {
   // 检查API密钥是否存在
   if (!process.env.OPENAI_API_KEY) {
-    throw new Error('DeepSeek API密钥未在环境变量中设置');
+    throw new Error('OpenAI API密钥未在环境变量中设置');
   }
 
+  console.log('OpenAI API密钥已设置');
+
+  // 使用自定义API服务
   return new OpenAI({
     openAIApiKey: process.env.OPENAI_API_KEY,
-    modelName: 'deepseek-chat', // DeepSeek模型名称
+    modelName: 'gpt-3.5-turbo', // OpenAI模型名称
     temperature: temperature,
     maxTokens: 1000,
     configuration: {
-      baseURL: 'https://api.deepseek.com/v1', // DeepSeek API基础URL
-    }
+      baseURL: 'https://api.vveai.com/v1', 
+    },
   });
 };
 

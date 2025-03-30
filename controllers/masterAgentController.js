@@ -48,3 +48,21 @@ exports.clearConversationHistory = asyncHandler(async (req, res) => {
     message: '对话历史已清除'
   });
 });
+
+// @desc    生成通用回复
+//@route   POST /api/agent/generate
+//@access  Private
+exports.generateResponse = asyncHandler(async (req, res) => {
+  const { message } = req.body;
+
+  if (!message) {
+    throw new AppError('请提供问题内容', 400);
+  }
+
+  const response = await masterAgentService.generateGenericResponse(message);    
+
+  res.status(200).json({
+    success: true,
+    data: response
+  });
+});
