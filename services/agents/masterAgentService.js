@@ -83,19 +83,6 @@ class MasterAgentService {
     }
   }
   
-  // 提取目的地（简化示例）
-  extractDestination(query) {
-    const destinations = ['北京', '上海', '广州', '深圳', '成都', '杭州', '西安', '三亚', '丽江', '香港', '澳门', '台北', '东京', '大阪', '首尔', '曼谷', '新加坡', '巴黎', '伦敦', '纽约', '洛杉矶', '悉尼'];
-    
-    for (const dest of destinations) {
-      if (query.includes(dest)) {
-        return dest;
-      }
-    }
-    
-    return null;
-  }
-  
   // 保存对话历史
   async saveConversation(userId, tripId, query, response) {
     try {

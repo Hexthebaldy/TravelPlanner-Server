@@ -166,3 +166,13 @@
 {"level":"info","message":"MongoDB Connected: localhost","service":"travel-planner-api","timestamp":"2025-03-31 00:00:25"}
 {"level":"info","message":"server is running at port: 3000","service":"travel-planner-api","timestamp":"2025-03-31 00:00:48"}
 {"level":"info","message":"MongoDB Connected: localhost","service":"travel-planner-api","timestamp":"2025-03-31 00:00:48"}
+{"level":"info","message":"server is running at port: 3000","service":"travel-planner-api","timestamp":"2025-03-31 16:33:31"}
+{"level":"info","message":"MongoDB Connected: localhost","service":"travel-planner-api","timestamp":"2025-03-31 16:33:31"}
+{"level":"info","message":"server is running at port: 3000","service":"travel-planner-api","timestamp":"2025-04-01 10:11:16"}
+{"level":"info","message":"MongoDB Connected: localhost","service":"travel-planner-api","timestamp":"2025-04-01 10:11:16"}
+{"level":"info","message":"server is running at port: 3000","service":"travel-planner-api","timestamp":"2025-04-01 10:15:33"}
+{"level":"info","message":"MongoDB Connected: localhost","service":"travel-planner-api","timestamp":"2025-04-01 10:15:33"}
+{"level":"info","message":"server is running at port: 3000","service":"travel-planner-api","timestamp":"2025-04-01 10:18:26"}
+{"level":"info","message":"MongoDB Connected: localhost","service":"travel-planner-api","timestamp":"2025-04-01 10:18:26"}
+{"level":"info","message":"server is running at port: 3000","service":"travel-planner-api","timestamp":"2025-04-01 10:21:48"}
+{"level":"info","message":"MongoDB Connected: localhost","service":"travel-planner-api","timestamp":"2025-04-01 10:21:48"}
